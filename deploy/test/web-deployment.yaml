@@ -1,0 +1,44 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.11.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: web
+  name: web
+spec:
+  replicas: 2
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: web
+    spec:
+      containers:
+      - env:
+        - name: AUTH0_CALLBACK_URL
+          value: http://app.trustthehinkie.com/callback
+        - name: AUTH0_CLIENT_ID
+          value: ariBhQW-sIIhj9oXVSgWDvRlWhoQTAQu
+        - name: AUTH0_CLIENT_SECRET
+          value: 7io8_1Lq0dXXnzo0-uxHZ3kI_sLkD6ujxm1GZmSwWt78r1QlK-JGGosUNq6Ifd2N
+        - name: AUTH0_DOMAIN
+          value: slackchamp.auth0.com
+        - name: DATABASE_URL
+          value: postgres://jerome:5f9c^B3^LpmX@jerome.cfz2nzwdkqqu.us-west-2.rds.amazonaws.com:5432/jerome
+          # value: postgres://deploy@postgres/slackchamp
+        - name: NODE_ENV
+          value: production
+        image: jeremysandor/slackchamp_web:latest
+        name: web
+        ports:
+        - containerPort: 3001
+        resources: {}
+      restartPolicy: Always
+status: {}
+
+
+# postgres://username:password@host:port/database
