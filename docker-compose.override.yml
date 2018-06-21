@@ -27,9 +27,9 @@ services:
     links:
       - api:api
     command: npm run start:dev
-    configs:
-      - source: ui_config_js
-        target: /ui/config.js
+    # configs:
+    #   - source: ui_config_js
+    #     target: /ui/config.js
     environment:
       API_URL: 'http://localhost:3001'
       NODE_ENV: development
@@ -40,7 +40,7 @@ services:
     image: "jeremysandor/zipstu_api:latest"
     build: ./zipstu-api/
     ports:
-     - "3001:3001"
+     - "45000:45000"
     volumes:
       - ./zipstu-api:/usr/src/app
       # - /usr/src/app/node_modules
